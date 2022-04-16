@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap');
+
+.App {
+    text-align: center;
+    font-family: 'Noto Serif KR', serif;
+}
+
+body {
+    margin: 0;
+}
+
+html {
+    line-height: 1.15; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+div {
+    box-sizing: content-box;
+}
+
+.Jumbotron {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+
+    .title {
+        margin: auto;
+        margin-bottom: 5px;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    p {
+        margin-bottom: 5px;
+        color: rgb(184, 144, 16);
+    }
+
+    input {
+        background-color: rgb(255, 255, 240);
+        border: 1px solid rgb(255, 193, 7);
+        padding: 10px;
+        text-align: left;
+    }
+
+    label {
+        margin-top: 10px;
+    }
+
+    Button {
+        color: rgb(184, 144, 16);
+        margin-bottom: 10px;
+    }
+}
+
+@example .register {
+    font-family: 'Noto Serif KR', serif;
+}
