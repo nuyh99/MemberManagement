@@ -42,7 +42,6 @@ public class IntegratedController {
         if (workerService.login(worker) != null) {
             Cookie idCookie = new Cookie("cookie", worker.getId());
             idCookie.setPath("/");
-            idCookie.setHttpOnly(true);
             response.addCookie(idCookie);
             return "success";
         }
@@ -101,10 +100,7 @@ public class IntegratedController {
         Permission permission = workerService.checkPermission(cookie.getValue());
         if (permission==Permission.MASTER || permission==Permission.WORKER) {
             Member byPhone = memberService.findByPhone(phone);
-            if (byPhone != null)
-                return true;
-            else
-                return false;
+            return byPhone != null;
         }
 
         return null;
