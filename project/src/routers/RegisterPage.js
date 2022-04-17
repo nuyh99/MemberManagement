@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import '../scss/RegisterPage.scss';
 import {Button, Modal, Form} from 'react-bootstrap';
+import axios from 'axios';
 
 function RegisterPage() {
     const [name, setName] = useState('');
@@ -24,10 +25,29 @@ function RegisterPage() {
         setName(event.currentTarget.value);
     };
 
-    const onSubmit = (event) => {
+    function submitAlert() {
+        axios
+            .post('http://localhost:8080/api/workerJoin', {
+                id: email,
+                pw: password,
+            })
+            .then((res) => {
+                alert('회원가입이 완료되었습니다.');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
+    const onSubmitpage = (event) => {
         event.preventDefault();
+
         if (password !== confirmPassword) {
-            return alert('비밀번호와 비밀번호확인은 같아야 합니다.');
+            return alert(
+                '비밀번호와 비밀번호 확인이 다릅니다. 다시 시도해주세요.'
+            );
+        } else {
+            return submitAlert();
         }
     };
 
@@ -119,8 +139,7 @@ function RegisterPage() {
                     <Button
                         style={{color: 'rgb(184, 144, 16)'}}
                         variant="outline-warning"
-                        onClick={handleClose}
-                        onSubmit={onSubmit}
+                        onClick={onSubmitpage}
                         type="submit">
                         가입하기
                     </Button>
