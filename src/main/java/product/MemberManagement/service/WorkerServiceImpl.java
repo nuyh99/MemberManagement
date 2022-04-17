@@ -28,7 +28,7 @@ public class WorkerServiceImpl implements WorkerService {
         if (workerRepository.existsById(worker.getId())) {
             Worker temp = workerRepository.getById(worker.getId());
             temp.setPermission(permission);
-            return workerRepository.save(worker);
+            return workerRepository.save(temp);
         }
 
         return null;
