@@ -5,8 +5,9 @@ import {Button, Modal, Form} from 'react-bootstrap';
 import axios from 'axios';
 import RegisterPage from './RegisterPage';
 import {useHistory} from 'react-router-dom';
+import Routes from './Routes';
 
-function LoginPage() {
+function LoginPage(props, {setToken}) {
     let history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,25 +23,30 @@ function LoginPage() {
     const onLoginHandler = (event) => {
         event.preventDefault();
         axios
-            .post('http://localhost:8080/api/login', {
-                id: email,
-                pw: password,
-            })
+            .post(
+                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/login',
+                {
+                    id: email,
+                    pw: password,
+                }
+            )
             .then((res) => {
                 if (res.data === 'success') {
-                    alert('로그인 성공!');
+                    props.setisAuthorized(true);
+                    // sessionStorage.setItem("isAuthorized", "true");
+                    alert('로그인 성공 !');
+                    props.setshowID(email);
                     history.push('/search');
+                } else if (res.data == '') {
+                    alert('비밀번호가 틀렸습니다. 다시 입력하세요.');
                 } else {
-                    alert('없는 회원입니다. 회원가입부터 하세요.');
+                    alert('없는 회원입니다. 회원가입 해주세요.');
                 }
+            })
+            .catch((error) => {
+                alert('없는 회원입니다. 회원가입 해주세요.');
+                console.log(error);
             });
-    };
-
-    const onLogoutHandler = (event) => {
-        event.preventDefault();
-        axios.post('http://localhost:8080/api/logout', null).then((res) => {
-            alert('로그아웃 성공 !');
-        });
     };
 
     return (
@@ -78,13 +84,6 @@ function LoginPage() {
                         접속하기
                     </Button>
                 </form>
-
-                <Button
-                    variant="outline-warning"
-                    type="submit"
-                    onClick={onLogoutHandler}>
-                    로그아웃
-                </Button>
             </div>
         </div>
     );

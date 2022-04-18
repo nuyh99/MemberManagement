@@ -11,9 +11,11 @@
         "node-sass": "^7.0.1",
         "react": "^18.0.0",
         "react-bootstrap": "^2.2.3",
+        "react-cookie": "^4.1.1",
         "react-dom": "^18.0.0",
         "react-router-dom": "^5.2.0",
         "react-scripts": "5.0.1",
+        "universal-cookie": "^4.0.4",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
@@ -28,7 +30,7 @@
             "react-app/jest"
         ]
     },
-    "proxy": "http://localhost:8080",
+    "proxy": "http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/login/",
     "browserslist": {
         "production": [
             ">0.2%",

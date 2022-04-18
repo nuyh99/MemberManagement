@@ -19,6 +19,11 @@ div {
 }
 
 .Jumbotron {
+    text-align: center;
+    margin: 0;
+    line-height: 1.15; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    box-sizing: content-box;
     display: flex;
     justify-content: center;
     align-items: center;

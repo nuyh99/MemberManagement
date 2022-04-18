@@ -27,12 +27,21 @@ function RegisterPage() {
 
     function submitAlert() {
         axios
-            .post('http://localhost:8080/api/workerJoin', {
-                id: email,
-                pw: password,
-            })
+            .post(
+                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/workerJoin',
+                {
+                    id: email,
+                    pw: password,
+                }
+            )
             .then((res) => {
-                alert('회원가입이 완료되었습니다.');
+                if (res.data == '') {
+                    alert(
+                        '이미 가입된 아이디입니다. 다른 아이디를 입력하세요.'
+                    );
+                } else {
+                    alert('축하합니다. 회원가입이 완료되었습니다.');
+                }
             })
             .catch((error) => {
                 console.log(error);
