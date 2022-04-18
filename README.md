@@ -22,8 +22,14 @@ Project creator : Frontend - 신재윤 / Backend - 황재현
 
 Use skills
 
-- Frontend : HTML, CSS, Javascript, React
+- Frontend : HTML, SCSS, Javascript, React, react-router-dom
 - Backend : Java, SpringBoot, MySQL, AWS
+
+<br>
+
+API
+- axios 통신
+- Session 쿠키 인증 방식
 
 <hr>
 
