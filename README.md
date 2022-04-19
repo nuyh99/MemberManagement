@@ -24,12 +24,13 @@ Use skills
 
 - Frontend : HTML, SCSS, Javascript, React, react-router-dom
 - Backend : Java, SpringBoot, MySQL, AWS
+(단, 호스팅 환경은 AWS에서 Vultur로 변경 예정)
 
 <br>
 
 API
 - axios 통신
-- Session 쿠키 인증 방식
+- Session 쿠키 인증 방식 (미해결)
 
 <hr>
 
