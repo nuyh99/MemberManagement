@@ -31,6 +31,8 @@ Use skills
 API
 - axios 통신
 - Session 쿠키 인증 방식 (미해결)
+- 현재, 쿠키가 Response Cookie 단에서는 보이지만, 크롬 개발자 도구 Application Cookie에서 보이지 않는 문제가 발생. HttpOnly 옵션을 해제해도 지속적
+- React 포트번호 3000, Spring Boot 포트번호 8080에서 오는 오류로 파악중. CORS오류를 해결했다고 생각했으나, 완전히 해결되지 않은 것으로 추정
 
 <hr>
 
