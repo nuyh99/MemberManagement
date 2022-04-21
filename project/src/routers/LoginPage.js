@@ -7,7 +7,7 @@ import RegisterPage from './RegisterPage';
 import {useHistory} from 'react-router-dom';
 import Routes from './Routes';
 
-function LoginPage(props, {setToken}) {
+function LoginPage(props) {
     let history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

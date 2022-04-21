@@ -1,6 +1,6 @@
 import '../scss/SearchPage.scss';
 import React, {useState} from 'react';
-import {Navbar, Container, Nav, Button, Collapse} from 'react-bootstrap';
+import {Navbar, Container, Button} from 'react-bootstrap';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import author from '../img/author.png';
@@ -62,6 +62,12 @@ function SearchPage(props) {
                     alert('로그아웃 실패 !');
                 }
             });
+    };
+
+    const onPermissionHandler = (event) => {
+        event.preventDefault();
+        props.setisPermission(true);
+        history.push('/permission');
     };
 
     return (
@@ -145,7 +151,8 @@ function SearchPage(props) {
                                             marginTop: '8px',
                                             marginLeft: '12px',
                                         }}
-                                        onClick={onSearchHandler}>
+                                        // onClick={onSearchHandler}
+                                        onClick={onPermissionHandler}>
                                         관리자 페이지
                                     </Button>
                                 </div>
