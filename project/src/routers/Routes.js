@@ -20,38 +20,26 @@ function Routes() {
             )} */}
 
             {isAuthorized === false ? (
-                <Redirect to="http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/" />
+                <Redirect to="/" />
             ) : isPermission === false ? (
-                <Redirect to="http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/search" />
+                <Redirect to="/search" />
             ) : (
-                <Redirect to="http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/permission" />
+                <Redirect to="/permission" />
             )}
 
             <Switch>
-                <Route
-                    exact
-                    path={
-                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/'
-                    }>
+                <Route exact path={'/'}>
                     <LoginPage
                         setisAuthorized={setisAuthorized}
                         setshowID={setshowID}></LoginPage>
                 </Route>
-                <Route
-                    exact
-                    path={
-                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/search'
-                    }>
+                <Route exact path={'/search'}>
                     <SearchPage
                         setisAuthorized={setisAuthorized}
                         setisPermission={setisPermission}
                         showID={showID}></SearchPage>
                 </Route>
-                <Route
-                    exact
-                    path={
-                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/permission'
-                    }>
+                <Route exact path={'/permission'}>
                     <PermissionPage
                         setisAuthorized={setisAuthorized}></PermissionPage>
                 </Route>

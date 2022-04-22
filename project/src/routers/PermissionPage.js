@@ -15,34 +15,40 @@ import author from '../img/author.png';
 function PermissionPage(props) {
     let history = useHistory();
     let [permissionState, setPermissionstate] = useState(false);
+    const [workerArray, setworkerArray] = useState([]);
+    const [memberArray, setmemberArray] = useState([]);
 
     const onLogoutHandler = (event) => {
         event.preventDefault();
-        axios
-            .post(
-                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/logout'
-            )
-            .then((res) => {
-                console.log(res);
-                if (res.data == '') {
-                    props.setisAuthorized(false);
-                    alert('로그아웃 성공 !');
-                    history.push(
-                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/'
-                    );
-                } else {
-                    alert('로그아웃 실패 !');
-                }
-            });
+        axios.post('http://localhost:8080/api/logout').then((res) => {
+            console.log(res);
+            if (res.data == '') {
+                props.setisAuthorized(false);
+                alert('로그아웃 성공 !');
+                history.push('/');
+            } else {
+                alert('로그아웃 실패 !');
+            }
+        });
     };
 
     const onWorkerHandler = (event) => {
         event.preventDefault();
+        // axios
+        //     .get('http://localhost:8080/api/workers', {withCredentials: true})
+        //     .then((res) => {
+        //         setworkerArray(res.data);
+        //     });
         setPermissionstate(false);
     };
 
-    const onUserHandler = (event) => {
+    const onMemberHandler = (event) => {
         event.preventDefault();
+        axios
+            .get('http://localhost:8080/api/members', {withCredentials: true})
+            .then((res) => {
+                setmemberArray(res.data);
+            });
         setPermissionstate(true);
     };
 
@@ -84,10 +90,21 @@ function PermissionPage(props) {
                                 </div>
                                 <div class="flex-grow-1 profile">
                                     <h3>관리자 페이지입니다.</h3>
+                                    <br></br>
                                     <p>
                                         직원 관리와 고객 관리가 가능합니다.
                                         <br></br>
-                                        사용 후에 반드시 로그아웃 해주세요.
+                                        직원 권한 변경, 고객 번호 추가, 삭제
+                                        <br></br>
+                                        작업 이후{' '}
+                                        <strong style={{color: 'blue'}}>
+                                            우측에 버튼
+                                        </strong>
+                                        을 눌러서{' '}
+                                        <strong style={{color: 'blue'}}>
+                                            갱신
+                                        </strong>
+                                        해주세요.
                                     </p>
                                 </div>
                             </div>
@@ -117,7 +134,7 @@ function PermissionPage(props) {
                                             paddingLeft: '40px',
                                             paddingRight: '40px',
                                         }}
-                                        onClick={onUserHandler}>
+                                        onClick={onMemberHandler}>
                                         고객 관리
                                     </Button>
                                 </div>
@@ -128,15 +145,15 @@ function PermissionPage(props) {
             </div>
 
             {permissionState === false ? (
-                <WorkerState></WorkerState>
+                <WorkerState workerArray={workerArray}></WorkerState>
             ) : (
-                <UserState></UserState>
+                <UserState memberArray={memberArray}></UserState>
             )}
         </div>
     );
 }
 
-function WorkerState() {
+function WorkerState(props) {
     return (
         <div className="subcontent">
             <div className="container white-box add">
@@ -161,7 +178,7 @@ function WorkerState() {
                                     }}>
                                     <tr>
                                         <td>1</td>
-                                        <td>Table cell</td>
+                                        <td>2</td>
                                         <td>Table cell</td>
                                         <td>Table cell</td>
                                         <td>
@@ -201,27 +218,6 @@ function WorkerState() {
                                             </DropdownButton>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>Table cell</td>
-                                        <td>
-                                            <DropdownButton
-                                                id="dropdown-basic-button"
-                                                title="권한 변경">
-                                                <Dropdown.Item href="#/action-1">
-                                                    권한 없음
-                                                </Dropdown.Item>
-                                                <Dropdown.Item href="#/action-2">
-                                                    직원
-                                                </Dropdown.Item>
-                                                <Dropdown.Item href="#/action-3">
-                                                    관리자
-                                                </Dropdown.Item>
-                                            </DropdownButton>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </Table>
                         </div>
@@ -232,13 +228,158 @@ function WorkerState() {
     );
 }
 
-function UserState() {
+function UserState(props) {
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+
+    const onNameHandler = (event) => {
+        setName(event.currentTarget.value);
+    };
+
+    const onPhoneHandler = (event) => {
+        setPhone(event.currentTarget.value);
+    };
+
+    const onAddmemberHandler = (event) => {
+        event.preventDefault();
+        axios
+            .post(
+                'http://localhost:8080/api/member',
+                {
+                    name: name,
+                    phone: phone,
+                },
+                {
+                    withCredentials: true,
+                }
+            )
+            .then(() => {
+                alert(
+                    '고객의 정보가 정상적으로 추가되었습니다.\n' +
+                        '갱신하려면 "고객 관리" 버튼을 다시 누르세요.'
+                );
+            })
+            .catch(() => {
+                alert('이미 있는 회원입니다.');
+            });
+    };
+
     return (
         <div className="subcontent">
             <div className="container white-box add">
-                <div className="user">
-                    <h2>고객 관리</h2>
-                    <div className="userInfo" style={{overflow: 'auto'}}></div>
+                <div className="member">
+                    <div className="d-flex">
+                        <div className="col-4">
+                            <h2>고객 관리 (번호순 정렬)</h2>
+                        </div>
+                        <div className="col-4"></div>
+                        <div className="col-4">
+                            <input
+                                className="inputName"
+                                type="text"
+                                placeholder="이름 입력"
+                                value={name}
+                                onChange={onNameHandler}
+                                style={{
+                                    textAlign: 'center',
+                                    padding: '8px',
+                                }}
+                            />
+                            <input
+                                className="inputPhone"
+                                type="text"
+                                placeholder="휴대폰 번호 입력"
+                                value={phone}
+                                onChange={onPhoneHandler}
+                                style={{
+                                    textAlign: 'center',
+                                    padding: '8px',
+                                }}
+                            />
+                            <Button
+                                variant="secondary"
+                                type="submit"
+                                style={{
+                                    padding: '7px',
+                                    marginBottom: '4px',
+                                }}
+                                onClick={onAddmemberHandler}>
+                                고객 추가
+                            </Button>
+                        </div>
+                    </div>
+
+                    <div className="memberInfo" style={{overflow: 'auto'}}>
+                        <div>
+                            <Table responsive="lg">
+                                <thead style={{textAlign: 'center'}}>
+                                    <tr>
+                                        <th></th>
+                                        <th>고객 이름</th>
+                                        <th>휴대폰 번호</th>
+                                        <th>정보 삭제</th>
+                                    </tr>
+                                </thead>
+                                <tbody
+                                    style={{
+                                        textAlign: 'center',
+                                        verticalAlign: 'middle',
+                                    }}>
+                                    {props.memberArray.map((a, i) => {
+                                        return (
+                                            <tr>
+                                                <td>{i + 1}</td>
+                                                <td>{a.name}</td>
+                                                <td>
+                                                    {a.phone.slice(0, [3]) +
+                                                        ' - ' +
+                                                        a.phone.slice(3, [7]) +
+                                                        ' - ' +
+                                                        a.phone.slice(7, [11])}
+                                                </td>
+                                                <td>
+                                                    <Button
+                                                        variant="outline-primary"
+                                                        type="submit"
+                                                        style={{
+                                                            paddingLeft: '20px',
+                                                            paddingRight:
+                                                                '20px',
+                                                        }}
+                                                        value={a.phone}
+                                                        onClick={(event) => {
+                                                            event.preventDefault();
+                                                            axios
+                                                                .post(
+                                                                    'http://localhost:8080/api/member/delete/',
+                                                                    {
+                                                                        phone: a.phone,
+                                                                    },
+                                                                    {
+                                                                        withCredentials: true,
+                                                                    }
+                                                                )
+                                                                .then(() => {
+                                                                    alert(
+                                                                        '삭제가 성공적으로 진행됐습니다.'
+                                                                    );
+                                                                })
+                                                                .catch(() => {
+                                                                    alert(
+                                                                        '이미 삭제된 번호입니다. "고객 관리" 버튼을 다시 눌러주세요.'
+                                                                    );
+                                                                });
+                                                        }}>
+                                                        정보 삭제
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </Table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

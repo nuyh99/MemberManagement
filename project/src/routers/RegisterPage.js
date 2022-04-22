@@ -28,11 +28,13 @@ function RegisterPage() {
     function submitAlert() {
         axios
             .post(
-                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/workerJoin',
+                'http://localhost:8080/api/workerJoin',
                 {
+                    name: name,
                     id: email,
                     pw: password,
-                }
+                },
+                {withCredentials: true}
             )
             .then((res) => {
                 if (res.data == '') {
