@@ -20,11 +20,11 @@ function Routes() {
             )} */}
 
             {isAuthorized === false ? (
-                <Redirect to="/" />
+                <Redirect to="http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/" />
             ) : isPermission === false ? (
-                <Redirect to="/search" />
+                <Redirect to="http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/search" />
             ) : (
-                <Redirect to="/permission" />
+                <Redirect to="http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/permission" />
             )}
 
             <Switch>
