@@ -39,7 +39,9 @@ function LoginPage(props) {
                     // sessionStorage.setItem("isAuthorized", "true");
                     alert('로그인 성공 !');
                     props.setshowID(email);
-                    history.push('/search');
+                    history.push(
+                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/search'
+                    );
                 } else if (res.data == '') {
                     alert('비밀번호가 틀렸습니다. 다시 입력하세요.');
                 } else {

@@ -22,7 +22,8 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "dev": "webpack-dev-server"
     },
     "eslintConfig": {
         "extends": [
@@ -42,5 +43,9 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "webpack-cli": "^4.9.2",
+        "webpack-dev-server": "^4.8.1"
     }
 }

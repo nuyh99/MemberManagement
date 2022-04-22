@@ -28,18 +28,30 @@ function Routes() {
             )}
 
             <Switch>
-                <Route exact path={'/'}>
+                <Route
+                    exact
+                    path={
+                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/'
+                    }>
                     <LoginPage
                         setisAuthorized={setisAuthorized}
                         setshowID={setshowID}></LoginPage>
                 </Route>
-                <Route exact path={'/search'}>
+                <Route
+                    exact
+                    path={
+                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/search'
+                    }>
                     <SearchPage
                         setisAuthorized={setisAuthorized}
                         setisPermission={setisPermission}
                         showID={showID}></SearchPage>
                 </Route>
-                <Route exact path={'/permission'}>
+                <Route
+                    exact
+                    path={
+                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/permission'
+                    }>
                     <PermissionPage
                         setisAuthorized={setisAuthorized}></PermissionPage>
                 </Route>
