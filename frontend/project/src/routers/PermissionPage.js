@@ -20,7 +20,7 @@ function PermissionPage(props) {
         event.preventDefault();
         axios
             .post(
-                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/logout'
+                '/api/logout'
             )
             .then((res) => {
                 console.log(res);
@@ -28,7 +28,7 @@ function PermissionPage(props) {
                     props.setisAuthorized(false);
                     alert('로그아웃 성공 !');
                     history.push(
-                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/'
+                        '/'
                     );
                 } else {
                     alert('로그아웃 실패 !');

@@ -22,7 +22,7 @@ function SearchPage(props) {
         event.preventDefault();
         axios
             .get(
-                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/member/',
+                '/api/member/',
                 {phone: phone}
             )
             .then((res) => {
@@ -50,7 +50,7 @@ function SearchPage(props) {
         event.preventDefault();
         axios
             .post(
-                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/logout'
+                '/api/logout'
             )
             .then((res) => {
                 console.log(res);
@@ -58,7 +58,7 @@ function SearchPage(props) {
                     props.setisAuthorized(false);
                     alert('로그아웃 성공 !');
                     history.push(
-                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/'
+                        '/'
                     );
                 } else {
                     alert('로그아웃 실패 !');
@@ -70,7 +70,7 @@ function SearchPage(props) {
         event.preventDefault();
         props.setisPermission(true);
         history.push(
-            'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/permission'
+            '/permission'
         );
     };
 
