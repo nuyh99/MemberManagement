@@ -6,6 +6,8 @@ import product.MemberManagement.domain.Permission;
 import product.MemberManagement.domain.Worker;
 import product.MemberManagement.domain.WorkerRepository;
 
+import java.util.List;
+
 @Service
 public class WorkerServiceImpl implements WorkerService {
     private final WorkerRepository workerRepository;
@@ -47,5 +49,10 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public Permission checkPermission(String id) {
         return workerRepository.getById(id).getPermission();
+    }
+
+    @Override
+    public List<Worker> findAll() {
+        return workerRepository.findAll();
     }
 }

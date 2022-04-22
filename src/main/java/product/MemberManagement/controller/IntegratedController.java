@@ -67,6 +67,18 @@ public class IntegratedController {
         return null;
     }
 
+    @GetMapping("/workers")     //직원 전체 조회
+    @ResponseBody
+    public List<Worker> findAllWorker(@CookieValue(name = "cookie") Cookie cookie) {
+        if (workerService.checkPermission(cookie.getValue()) == Permission.MASTER) {
+            List<Worker> all = workerService.findAll();
+            if(!all.isEmpty())
+                return all;
+        }
+
+        return null;
+    }
+
     @PostMapping("/permission")       //직원 권한 주기(MASTER 등급만 가능)
     @ResponseBody
     public String givePermission(@CookieValue(name = "cookie") Cookie cookie,
@@ -93,10 +105,10 @@ public class IntegratedController {
         return null;
     }
 
-    @GetMapping("/member/{phone}")      //휴대폰 번호로 조회(MASTER, WORKER 등급만 가능)
+    @GetMapping("/member")      //휴대폰 번호로 조회(MASTER, WORKER 등급만 가능)
     @ResponseBody
     public Boolean getMemberByPhone(@CookieValue(name = "cookie") Cookie cookie,
-                                    @PathVariable("phone") String phone) {
+                                    @RequestParam("phone") String phone) {
         Permission permission = workerService.checkPermission(cookie.getValue());
         if (permission==Permission.MASTER || permission==Permission.WORKER) {
             Member byPhone = memberService.findByPhone(phone);
