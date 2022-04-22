@@ -22,6 +22,9 @@ dependencies {
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.4'
 }
 
+classpath("com.moowork.gradle:gradle-node-plugin")
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
