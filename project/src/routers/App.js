@@ -5,7 +5,7 @@ import Routes from './Routes';
 import axios from 'axios';
 
 function App() {
-    axios.defaults.withCredentials = true;
+    // axios.defaults.withCredentials = true;
 
     return (
         <Routes></Routes>
