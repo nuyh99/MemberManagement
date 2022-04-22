@@ -13,7 +13,7 @@ import product.MemberManagement.service.WorkerService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import java.util.StringTokenizer;
+import java.util.List;
 
 
 @Controller
@@ -101,6 +101,17 @@ public class IntegratedController {
         if (permission==Permission.MASTER || permission==Permission.WORKER) {
             Member byPhone = memberService.findByPhone(phone);
             return byPhone != null;
+        }
+
+        return null;
+    }
+
+    @GetMapping("/members")             //회원 전체 조회(MASTER 등급만 가능)
+    @ResponseBody
+    public List<Member> getAllMember(@CookieValue(name="cookie") Cookie cookie){
+        Permission permission = workerService.checkPermission(cookie.getValue());
+        if (permission == Permission.MASTER) {
+            return memberService.findAll();
         }
 
         return null;

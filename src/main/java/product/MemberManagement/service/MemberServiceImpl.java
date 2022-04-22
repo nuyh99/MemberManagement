@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import product.MemberManagement.domain.Member;
 import product.MemberManagement.domain.MemberRepository;
 
+import java.util.List;
+
 @Service
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
@@ -38,6 +40,15 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return target;
+    }
+
+    @Override
+    public List<Member> findAll() {
+        List<Member> all = memberRepository.findAll();
+        if(!all.isEmpty())
+            return all;
+
+        return null;
     }
 
     @Override

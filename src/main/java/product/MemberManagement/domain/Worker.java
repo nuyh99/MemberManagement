@@ -8,11 +8,21 @@ public class Worker {
     @Id
     private String id;
     private String pw;
+    private String name;
     private Permission permission=Permission.NOTHING;
 
-    public Worker(String id, String pw) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Worker(String id, String pw, String name) {
         this.id = id;
         this.pw = pw;
+        this.name=name;
     }
 
     public Worker() {
@@ -47,6 +57,7 @@ public class Worker {
         return "Worker{" +
                 "id='" + id + '\'' +
                 ", pw='" + pw + '\'' +
+                ", name='" + name + '\'' +
                 ", permission=" + permission +
                 '}';
     }

@@ -8,5 +8,6 @@ public interface MemberService {
     Member join(Member member);
     Member delete(String phone);
     Member findByPhone(String phone);
+    List<Member> findAll();
     void clearMember();
 }
