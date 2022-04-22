@@ -28,11 +28,10 @@ function LoginPage(props) {
                 {
                     id: email,
                     pw: password,
+                },
+                {
+                    withCredentials: true,
                 }
-                // ,
-                // {
-                //     withCredentials: true,
-                // }
             )
             .then((res) => {
                 if (res.data === 'success') {
