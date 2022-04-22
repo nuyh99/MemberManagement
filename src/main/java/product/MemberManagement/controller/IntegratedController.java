@@ -42,10 +42,11 @@ public class IntegratedController {
                         HttpServletResponse response) {
         if (workerService.login(worker) != null) {
             ResponseCookie cookie = ResponseCookie.from("cookie", worker.getId())
-                    .sameSite("")
                     .path("/")
                     .build();
-            response.setHeader("Set-Cookie", cookie.toString());
+
+            response.setHeader("Set-Cookie", cookie + "; SameSite=");
+            System.out.println(cookie);
 //            Cookie idCookie = new Cookie("cookie", worker.getId());
 //            idCookie.setPath("/");
 //            idCookie.setHttpOnly(true);
