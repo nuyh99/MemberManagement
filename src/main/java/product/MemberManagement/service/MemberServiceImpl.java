@@ -6,7 +6,7 @@ import product.MemberManagement.domain.Member;
 import product.MemberManagement.domain.MemberRepository;
 
 @Service
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     @Autowired
@@ -16,7 +16,10 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Member join(Member member) {
-        return memberRepository.save(member);
+        if (memberRepository.existsById(member.getPhone()))
+            return null;
+        else
+            return memberRepository.save(member);
     }
 
     @Override
@@ -28,9 +31,9 @@ public class MemberServiceImpl implements MemberService{
 
     @Override
     public Member findByPhone(String phone) {
-        Member target=null;
+        Member target = null;
 
-        if(memberRepository.existsById(phone)) {
+        if (memberRepository.existsById(phone)) {
             target = memberRepository.getById(phone);
         }
 
