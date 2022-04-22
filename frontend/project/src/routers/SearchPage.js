@@ -57,7 +57,9 @@ function SearchPage(props) {
                 if (res.data == '') {
                     props.setisAuthorized(false);
                     alert('로그아웃 성공 !');
-                    history.push('/');
+                    history.push(
+                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/'
+                    );
                 } else {
                     alert('로그아웃 실패 !');
                 }
@@ -67,7 +69,9 @@ function SearchPage(props) {
     const onPermissionHandler = (event) => {
         event.preventDefault();
         props.setisPermission(true);
-        history.push('/permission');
+        history.push(
+            'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/permission'
+        );
     };
 
     return (

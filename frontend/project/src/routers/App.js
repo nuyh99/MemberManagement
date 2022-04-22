@@ -7,20 +7,7 @@ import axios from 'axios';
 function App() {
     // axios.defaults.withCredentials = true;
 
-    return (
-        <Routes></Routes>
-        // <Switch>
-        //     <Route exact path={'/'}>
-        //         <LoginPage></LoginPage>
-        //     </Route>
-        //     {/* <Route exact path={'/permission'}>
-        //         <PermissionPage></PermissionPage>
-        //     </Route> */}
-        //     <Route exact path={'/search'}>
-        //         <SearchPage></SearchPage>
-        //     </Route>
-        // </Switch>
-    );
+    return <Routes></Routes>;
 }
 
 export default App;
