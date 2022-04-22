@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap');
+
+.permissionPage {
+    background-color: #f7f9fc;
+    height: 100vh;
+    text-align: center;
+    margin: 0;
+    line-height: 1.15; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    box-sizing: content-box;
+    font-family: 'Noto Serif KR', serif;
+
+    .white-box {
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0.5px 0.5px 2px 1px #eee;
+    }
+}
+
+.worker {
+    height: 45vh;
+
+    .workerInfo {
+        background-color: #f7f9fc;
+        margin-top: 30px;
+        height: 35vh;
+    }
+}
+
+.user {
+    height: 45vh;
+
+    .userInfo {
+        background-color: #f7f9fc;
+        margin-top: 30px;
+        height: 35vh;
+    }
+}
