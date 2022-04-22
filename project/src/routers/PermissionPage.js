@@ -83,7 +83,7 @@ function PermissionPage(props) {
                                 <div class="flex-grow-1 profile">
                                     <h3>관리자 페이지입니다.</h3>
                                     <p>
-                                        직원 관리와 회원 관리가 가능합니다.
+                                        직원 관리와 고객 관리가 가능합니다.
                                         <br></br>
                                         사용 후에 반드시 로그아웃 해주세요.
                                     </p>
@@ -116,7 +116,7 @@ function PermissionPage(props) {
                                             paddingRight: '40px',
                                         }}
                                         onClick={onUserHandler}>
-                                        회원 관리
+                                        고객 관리
                                     </Button>
                                 </div>
                             </div>
@@ -235,7 +235,7 @@ function UserState() {
         <div className="subcontent">
             <div className="container white-box add">
                 <div className="user">
-                    <h2>회원 관리</h2>
+                    <h2>고객 관리</h2>
                     <div className="userInfo" style={{overflow: 'auto'}}></div>
                 </div>
             </div>
