@@ -41,16 +41,10 @@ public class IntegratedController {
     public String login(@RequestBody Worker worker,
                         HttpServletResponse response) {
         if (workerService.login(worker) != null) {
-            ResponseCookie cookie = ResponseCookie.from("cookie", worker.getId())
-                    .path("/")
-                    .build();
-
-            response.setHeader("Set-Cookie", cookie + "; SameSite=");
-            System.out.println(cookie);
-//            Cookie idCookie = new Cookie("cookie", worker.getId());
-//            idCookie.setPath("/");
-//            idCookie.setHttpOnly(true);
-//            response.addCookie(idCookie);
+            Cookie idCookie = new Cookie("cookie", worker.getId());
+            idCookie.setPath("/");
+            idCookie.setHttpOnly(true);
+            response.addCookie(idCookie);
             return "success";
         }
 
