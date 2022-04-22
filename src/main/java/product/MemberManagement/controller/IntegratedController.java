@@ -1,6 +1,8 @@
 package product.MemberManagement.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.session.DefaultCookieSerializerCustomizer;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +30,6 @@ public class IntegratedController {
         this.memberService = memberService;
     }
 
-
     @PostMapping("/")
     @ResponseBody
     public String index(@RequestBody Worker worker) {
@@ -40,9 +41,15 @@ public class IntegratedController {
     public String login(@RequestBody Worker worker,
                         HttpServletResponse response) {
         if (workerService.login(worker) != null) {
-            Cookie idCookie = new Cookie("cookie", worker.getId());
-            idCookie.setPath("/");
-            response.addCookie(idCookie);
+            ResponseCookie cookie = ResponseCookie.from("cookie", worker.getId())
+                    .sameSite("")
+                    .path("/")
+                    .build();
+            response.setHeader("Set-Cookie", cookie.toString());
+//            Cookie idCookie = new Cookie("cookie", worker.getId());
+//            idCookie.setPath("/");
+//            idCookie.setHttpOnly(true);
+//            response.addCookie(idCookie);
             return "success";
         }
 
