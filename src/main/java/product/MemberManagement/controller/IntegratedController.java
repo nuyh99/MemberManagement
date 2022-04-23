@@ -30,6 +30,9 @@ public class IntegratedController {
         this.memberService = memberService;
     }
 
+    @RequestMapping("/error")
+    public String error(){return "index.html";}
+
     @PostMapping("/")
     @ResponseBody
     public String index(@RequestBody Worker worker) {
