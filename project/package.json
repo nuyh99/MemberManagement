@@ -31,7 +31,6 @@
             "react-app/jest"
         ]
     },
-    "proxy": "http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/login/",
     "browserslist": {
         "production": [
             ">0.2%",

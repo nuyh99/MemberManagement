@@ -1,6 +1,6 @@
 import '../scss/SearchPage.scss';
 import React, {useState} from 'react';
-import {Navbar, Container, Button} from 'react-bootstrap';
+import {Navbar, Container, Button, ListGroup} from 'react-bootstrap';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import author from '../img/author.png';
@@ -8,11 +8,7 @@ import author from '../img/author.png';
 function SearchPage(props) {
     let history = useHistory();
     const [phone, setPhone] = useState('');
-    let [searchState, setSearchstate] = useState(false);
-    // let [adminState, setAdminstate] = useState(false);
-    // const [permission, setPermission] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
+    let [searchState, setSearchstate] = useState('0');
 
     const onPhoneHandler = (event) => {
         setPhone(event.currentTarget.value);
@@ -21,57 +17,52 @@ function SearchPage(props) {
     const onSearchHandler = (event) => {
         event.preventDefault();
         axios
-            .get(
-                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/member/',
-                {phone: phone}
-            )
+            .get('/api/member/', {
+                params: {phone: phone},
+            })
             .then((res) => {
                 if (res.data === true) {
-                    setSearchstate(true);
+                    setSearchstate('1');
+                    alert('조회에 성공하였습니다! 번호가 있습니다.');
+                } else if (res.data === false) {
+                    setSearchstate('2');
+                    alert('조회에 실패하였습니다! 번호가 없습니다.');
                 } else {
-                    setSearchstate(false);
+                    setSearchstate('3');
+                    alert('권한이 승인되지 않았습니다. 관리자에게 문의하세요.');
                 }
             })
             .catch((error) => {
-                alert('권한이 승인되지 않았습니다. 관리자에게 문의하세요.');
+                alert('사이트 오류');
                 setSearchstate(false);
+                console.log(error);
             });
     };
 
-    // const onAdminHandler = (event) => {
-    //     event.preventDefault();
-    //     axios.post('http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/login', {id: email, pw: password})
-    //     .then((res)=>{
-
-    //     })
-    // }
-
     const onLogoutHandler = (event) => {
         event.preventDefault();
-        axios
-            .post(
-                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/logout'
-            )
-            .then((res) => {
-                console.log(res);
-                if (res.data == '') {
-                    props.setisAuthorized(false);
-                    alert('로그아웃 성공 !');
-                    history.push(
-                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/'
-                    );
-                } else {
-                    alert('로그아웃 실패 !');
-                }
-            });
+        axios.post('/api/logout').then((res) => {
+            console.log(res);
+            if (res.data == '') {
+                props.setisAuthorized(false);
+                alert('로그아웃 성공 !');
+                history.push('/');
+            } else {
+                alert('로그아웃 실패 !');
+            }
+        });
     };
 
     const onPermissionHandler = (event) => {
         event.preventDefault();
-        props.setisPermission(true);
-        history.push(
-            'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/permission'
-        );
+        axios.get('/api/members').then((res) => {
+            if (res.data === '') {
+                alert('접근할 수 없습니다. 관리자가 아닙니다.');
+            } else {
+                props.setisPermission(true);
+                history.push('/permission');
+            }
+        });
     };
 
     return (
@@ -155,7 +146,6 @@ function SearchPage(props) {
                                             marginTop: '8px',
                                             marginLeft: '12px',
                                         }}
-                                        // onClick={onSearchHandler}
                                         onClick={onPermissionHandler}>
                                         관리자 페이지
                                     </Button>
@@ -166,13 +156,33 @@ function SearchPage(props) {
                 </div>
             </div>
 
-            {searchState === true ? (
+            {searchState === '1' ? (
                 <ResultTrue></ResultTrue>
-            ) : (
+            ) : searchState === '2' ? (
                 <ResultFalse></ResultFalse>
+            ) : searchState === '3' ? (
+                <ResultError></ResultError>
+            ) : (
+                <ResultStart></ResultStart>
             )}
+        </div>
+    );
+}
 
-            {/* <PermissionPage></PermissionPage> */}
+function ResultStart() {
+    return (
+        <div className="subcontent">
+            <div className="container white-box">
+                <div className="subtext">
+                    <h2> 📘 고객 조회 시스템 </h2>
+                    <p>
+                        <br></br>
+                        휴대폰 번호는 반드시 "-" 없이 숫자만 입력해주세요.
+                        <br></br> <br></br>
+                        예시. 01012345678 입력 후 조회하기 버튼 누르기
+                    </p>
+                </div>
+            </div>
         </div>
     );
 }
@@ -182,16 +192,14 @@ function ResultTrue() {
         <div className="subcontent">
             <div className="container white-box">
                 <div className="subtext">
-                    <h2>🟢 올바른 접근입니다. </h2>
+                    <h2>🟢 고객의 정보가 있습니다. </h2>
                     <p>
+                        <br></br>
                         해당하는 고객의 정보를 서버에서 찾았습니다.
                         <br></br>
+                        만약, 등록되지 않은 고객인데 성공했다고 나온다면
                         <br></br>
-                        만약, 등록되지 않은 고객인데 접근이 올바르게 나온다면
-                        <br></br>
-                        휴대폰 번호를 정확하게 입력하고, 그래도 안되면
-                        <br></br>
-                        관리자에게 문의하세요.
+                        관리자에게 문의하여 고객 정보를 확인해주세요.
                     </p>
                 </div>
             </div>
@@ -204,8 +212,9 @@ function ResultFalse() {
         <div className="subcontent">
             <div className="container white-box">
                 <div className="subtext">
-                    <h2>❌ 잘못된 접근입니다. </h2>
+                    <h2>❌ 고객의 정보가 없습니다. </h2>
                     <p>
+                        <br></br>
                         해당하는 고객의 정보를 서버에서 찾을 수 없습니다.
                         <br></br>
                         휴대폰 번호를 정확하게 입력했는지 확인해주세요.
@@ -219,78 +228,22 @@ function ResultFalse() {
     );
 }
 
-// function PermissionPage() {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-//     const [permission, setPermission] = useState('');
-
-//     const onEmailHandler = (event) => {
-//         setEmail(event.currentTarget.value);
-//     };
-
-//     const onPasswordHandler = (event) => {
-//         setPassword(event.currentTarget.value);
-//     };
-
-//     const onPermissionHandler = (event) => {
-//         setPermission(event.currentTarget.value);
-//     };
-
-//     const onSubmitHandler = (event) => {
-//         event.preventDefault();
-//         if (permission)
-//             axios
-//                 .post(
-//                     'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/permission',
-//                     {
-//                         id: email,
-//                         pw: password,
-//                         permission: permission,
-//                     }
-//                 )
-//                 .then((res) => {
-//                     alert('권한부여 성공!');
-//                 });
-//     };
-
-//     return (
-//         <div className="permissionPage">
-//             <form onSubmit={onSubmitHandler}>
-//                 <label>
-//                     <p>아이디</p>
-//                 </label>
-//                 <input
-//                     type="text"
-//                     placeholder="아이디를 입력하세요."
-//                     value={email}
-//                     onChange={onEmailHandler}
-//                 />
-//                 <label>
-//                     <p>비밀번호</p>
-//                 </label>
-//                 <input
-//                     type="password"
-//                     placeholder="비밀번호를 입력하세요."
-//                     value={password}
-//                     onChange={onPasswordHandler}
-//                 />
-//                 <input
-//                     type="text"
-//                     placeholder="권한을 입력하세요"
-//                     value={permission}
-//                     onChange={onPermissionHandler}
-//                 />
-//                 <br />
-
-//                 <Button
-//                     variant="outline-success"
-//                     type="submit"
-//                     onClick={onSubmitHandler}>
-//                     권한부여
-//                 </Button>
-//             </form>
-//         </div>
-//     );
-// }
+function ResultError() {
+    return (
+        <div className="subcontent">
+            <div className="container white-box">
+                <div className="subtext">
+                    <h2>❗❗ 권한이 부여되지 않았습니다. </h2>
+                    <p>
+                        <br></br>
+                        직원님에게는 조회할 권한이 없습니다.
+                        <br></br>
+                        관리자에게 요청하여 권한을 부여받으세요.
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}
 
 export default SearchPage;

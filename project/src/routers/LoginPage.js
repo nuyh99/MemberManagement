@@ -1,11 +1,10 @@
 import '../scss/LoginPage.scss';
 import React, {useState} from 'react';
 import lionimg from '../img/lion.png';
-import {Button, Modal, Form} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import axios from 'axios';
 import RegisterPage from './RegisterPage';
 import {useHistory} from 'react-router-dom';
-import Routes from './Routes';
 
 function LoginPage(props) {
     let history = useHistory();
@@ -23,25 +22,16 @@ function LoginPage(props) {
     const onLoginHandler = (event) => {
         event.preventDefault();
         axios
-            .post(
-                'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:8080/api/login',
-                {
-                    id: email,
-                    pw: password,
-                },
-                {
-                    withCredentials: true,
-                }
-            )
+            .post('/api/login', {
+                id: email,
+                pw: password,
+            })
             .then((res) => {
                 if (res.data === 'success') {
                     props.setisAuthorized(true);
-                    // sessionStorage.setItem("isAuthorized", "true");
                     alert('로그인 성공 !');
                     props.setshowID(email);
-                    history.push(
-                        'http://ec2-50-18-213-243.us-west-1.compute.amazonaws.com:3000/search'
-                    );
+                    history.push('/search');
                 } else if (res.data == '') {
                     alert('비밀번호가 틀렸습니다. 다시 입력하세요.');
                 } else {
