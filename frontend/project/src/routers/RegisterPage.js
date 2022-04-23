@@ -28,11 +28,17 @@ function RegisterPage() {
     function submitAlert() {
         axios
             .post(
+<<<<<<< HEAD
                 '/api/workerJoin',
+=======
+                'http://localhost:8080/api/workerJoin',
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
                 {
+                    name: name,
                     id: email,
                     pw: password,
-                }
+                },
+                {withCredentials: true}
             )
             .then((res) => {
                 if (res.data == '') {

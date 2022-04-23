@@ -28,30 +28,42 @@ function Routes() {
             )}
 
             <Switch>
+<<<<<<< HEAD
                 <Route
                     exact
                     path={
                         '/'
                     }>
+=======
+                <Route exact path={'/'}>
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
                     <LoginPage
                         setisAuthorized={setisAuthorized}
                         setshowID={setshowID}></LoginPage>
                 </Route>
+<<<<<<< HEAD
                 <Route
                     exact
                     path={
                         '/search'
                     }>
+=======
+                <Route exact path={'/search'}>
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
                     <SearchPage
                         setisAuthorized={setisAuthorized}
                         setisPermission={setisPermission}
                         showID={showID}></SearchPage>
                 </Route>
+<<<<<<< HEAD
                 <Route
                     exact
                     path={
                         '/permission'
                     }>
+=======
+                <Route exact path={'/permission'}>
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
                     <PermissionPage
                         setisAuthorized={setisAuthorized}></PermissionPage>
                 </Route>

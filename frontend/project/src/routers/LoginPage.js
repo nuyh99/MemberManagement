@@ -1,11 +1,10 @@
 import '../scss/LoginPage.scss';
 import React, {useState} from 'react';
 import lionimg from '../img/lion.png';
-import {Button, Modal, Form} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import axios from 'axios';
 import RegisterPage from './RegisterPage';
 import {useHistory} from 'react-router-dom';
-import Routes from './Routes';
 
 function LoginPage(props) {
     let history = useHistory();
@@ -24,7 +23,11 @@ function LoginPage(props) {
         event.preventDefault();
         axios
             .post(
+<<<<<<< HEAD
                 '/api/login',
+=======
+                'http://localhost:8080/api/login',
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
                 {
                     id: email,
                     pw: password,
@@ -35,9 +38,13 @@ function LoginPage(props) {
                     props.setisAuthorized(true);
                     alert('로그인 성공 !');
                     props.setshowID(email);
+<<<<<<< HEAD
                     history.push(
                         '/search'
                     );
+=======
+                    history.push('/search');
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
                 } else if (res.data == '') {
                     alert('비밀번호가 틀렸습니다. 다시 입력하세요.');
                 } else {
