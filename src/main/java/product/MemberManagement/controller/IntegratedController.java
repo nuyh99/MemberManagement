@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import product.MemberManagement.DTO.WorkerResponse;
 import product.MemberManagement.domain.Member;
 import product.MemberManagement.domain.Permission;
 import product.MemberManagement.domain.Phone;
@@ -13,6 +14,7 @@ import product.MemberManagement.service.WorkerService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -69,11 +71,9 @@ public class IntegratedController {
 
     @GetMapping("/workers")     //직원 전체 조회
     @ResponseBody
-    public List<Worker> findAllWorker(@CookieValue(name = "cookie") Cookie cookie) {
+    public List<WorkerResponse> findAllWorker(@CookieValue(name = "cookie") Cookie cookie) {
         if (workerService.checkPermission(cookie.getValue()) == Permission.MASTER) {
-            List<Worker> all = workerService.findAll();
-            if(!all.isEmpty())
-                return all;
+            return workerService.findAll();
         }
 
         return null;

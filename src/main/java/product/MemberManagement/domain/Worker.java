@@ -7,25 +7,16 @@ import javax.persistence.Id;
 public class Worker {
     @Id
     private String id;
+
     private String pw;
     private String name;
     private Permission permission=Permission.NOTHING;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Worker(String id, String pw, String name) {
+    public Worker(String id, String pw, String name, Permission permission) {
         this.id = id;
         this.pw = pw;
-        this.name=name;
-    }
-
-    public Worker() {
+        this.name = name;
+        this.permission = permission;
     }
 
     public String getId() {
@@ -44,12 +35,23 @@ public class Worker {
         this.pw = pw;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Permission getPermission() {
         return permission;
     }
 
     public void setPermission(Permission permission) {
         this.permission = permission;
+    }
+
+    public Worker() {
     }
 
     @Override

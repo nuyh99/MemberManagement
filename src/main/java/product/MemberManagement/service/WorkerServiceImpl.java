@@ -2,10 +2,12 @@ package product.MemberManagement.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import product.MemberManagement.DTO.WorkerResponse;
 import product.MemberManagement.domain.Permission;
 import product.MemberManagement.domain.Worker;
 import product.MemberManagement.domain.WorkerRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,7 +54,13 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public List<Worker> findAll() {
-        return workerRepository.findAll();
+    public List<WorkerResponse> findAll() {
+        List<Worker> all = workerRepository.findAll();
+        List<WorkerResponse> dto = new ArrayList<>();
+        all.stream().forEach(o-> dto.add(new WorkerResponse(o)));
+        if(!dto.isEmpty())
+            return dto;
+
+        return null;
     }
 }

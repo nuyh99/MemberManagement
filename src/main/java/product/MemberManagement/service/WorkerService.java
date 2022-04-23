@@ -1,5 +1,6 @@
 package product.MemberManagement.service;
 
+import product.MemberManagement.DTO.WorkerResponse;
 import product.MemberManagement.domain.Permission;
 import product.MemberManagement.domain.Worker;
 
@@ -10,5 +11,5 @@ public interface WorkerService {
     Worker givePermission(Worker worker, Permission permission);
     Worker login(Worker worker);
     Permission checkPermission(String id);
-    List<Worker> findAll();
+    List<WorkerResponse> findAll();
 }
