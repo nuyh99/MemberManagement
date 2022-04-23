@@ -9,6 +9,13 @@ function SearchPage(props) {
     let history = useHistory();
     const [phone, setPhone] = useState('');
     let [searchState, setSearchstate] = useState('0');
+<<<<<<< HEAD
+=======
+    // let [adminState, setAdminstate] = useState(false);
+    // const [permission, setPermission] = useState('');
+    // const [email, setEmail] = useState('');
+    // const [password, setPassword] = useState('');
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
 
     const onPhoneHandler = (event) => {
         setPhone(event.currentTarget.value);
@@ -17,8 +24,14 @@ function SearchPage(props) {
     const onSearchHandler = (event) => {
         event.preventDefault();
         axios
+<<<<<<< HEAD
             .get('/api/member/', {
                 params: {phone: phone},
+=======
+            .get('http://localhost:8080/api/member/', {
+                params: {phone: phone},
+                withCredentials: true,
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
             })
             .then((res) => {
                 if (res.data === true) {
@@ -41,6 +54,7 @@ function SearchPage(props) {
 
     const onLogoutHandler = (event) => {
         event.preventDefault();
+<<<<<<< HEAD
         axios.post('/api/logout').then((res) => {
             console.log(res);
             if (res.data == '') {
@@ -51,10 +65,25 @@ function SearchPage(props) {
                 alert('로그아웃 실패 !');
             }
         });
+=======
+        axios
+            .post('http://localhost:8080/api/logout', {withCredentials: true})
+            .then((res) => {
+                console.log(res);
+                if (res.data == '') {
+                    props.setisAuthorized(false);
+                    alert('로그아웃 성공 !');
+                    history.push('/');
+                } else {
+                    alert('로그아웃 실패 !');
+                }
+            });
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
     };
 
     const onPermissionHandler = (event) => {
         event.preventDefault();
+<<<<<<< HEAD
         axios.get('/api/members').then((res) => {
             if (res.data === '') {
                 alert('접근할 수 없습니다. 관리자가 아닙니다.');
@@ -63,6 +92,18 @@ function SearchPage(props) {
                 history.push('/permission');
             }
         });
+=======
+        axios
+            .get('http://localhost:8080/api/members', {withCredentials: true})
+            .then((res) => {
+                if (res.data === '') {
+                    alert('접근할 수 없습니다. 관리자가 아닙니다.');
+                } else {
+                    props.setisPermission(true);
+                    history.push('/permission');
+                }
+            });
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
     };
 
     return (
@@ -187,6 +228,31 @@ function ResultStart() {
     );
 }
 
+function ResultStart() {
+    return (
+        <div className="subcontent">
+            <div className="container white-box">
+                <div className="subtext">
+<<<<<<< HEAD
+                    <h2>🟢 고객의 정보가 있습니다. </h2>
+                    <p>
+                        <br></br>
+                        해당하는 고객의 정보를 서버에서 찾았습니다.
+                        <br></br>
+=======
+                    <h2> 📘 고객 조회 시스템 </h2>
+                    <p>
+                        <br></br>
+                        휴대폰 번호는 반드시 "-" 없이 숫자만 입력해주세요.
+                        <br></br> <br></br>
+                        예시. 01012345678 입력 후 조회하기 버튼 누르기
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 function ResultTrue() {
     return (
         <div className="subcontent">
@@ -197,6 +263,7 @@ function ResultTrue() {
                         <br></br>
                         해당하는 고객의 정보를 서버에서 찾았습니다.
                         <br></br>
+>>>>>>> 9f8c28f94e857109c2f6695f4991a22f9bdcc31e
                         만약, 등록되지 않은 고객인데 성공했다고 나온다면
                         <br></br>
                         관리자에게 문의하여 고객 정보를 확인해주세요.
