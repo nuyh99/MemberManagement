@@ -141,7 +141,9 @@ function PermissionPage(props) {
             </div>
 
             {permissionState === false ? (
-                <WorkerState workerArray={workerArray}></WorkerState>
+                <WorkerState
+                    workerArray={workerArray}
+                    setworkerArray={setworkerArray}></WorkerState>
             ) : (
                 <UserState memberArray={memberArray}></UserState>
             )}
@@ -153,25 +155,6 @@ function WorkerState(props) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [permission, setPermission] = useState('');
-
-    const onPermissionHandler = (event) => {
-        event.preventDefault();
-        axios
-            .post('/api/member', {
-                name: name,
-                email: email,
-                permission: permission,
-            })
-            .then(() => {
-                alert(
-                    '직원의 권한이 수정되었습니다.\n' +
-                        '갱신하려면 "직원 관리" 버튼을 다시 누르세요.'
-                );
-            })
-            .catch(() => {
-                alert('오류입니다.');
-            });
-    };
 
     return (
         <div className="subcontent">
@@ -200,28 +183,112 @@ function WorkerState(props) {
                                             <tr>
                                                 <td>{i + 1}</td>
                                                 <td>{a.name}</td>
-                                                <td>{a.email}</td>
+                                                <td>{a.id}</td>
                                                 <td>{a.permission}</td>
                                                 <td>
                                                     <DropdownButton
                                                         id="dropdown-basic-button"
                                                         title="권한 변경">
                                                         <Dropdown.Item
-                                                            onClick={
-                                                                onPermissionHandler
-                                                            }>
+                                                            onClick={(
+                                                                event
+                                                            ) => {
+                                                                event.preventDefault();
+                                                                axios
+                                                                    .post(
+                                                                        '/api/member',
+                                                                        {
+                                                                            name: a.name,
+                                                                            id: a.id,
+                                                                            permission:
+                                                                                (a.permission =
+                                                                                    'NOTHING'),
+                                                                        }
+                                                                    )
+                                                                    .then(
+                                                                        () => {
+                                                                            alert(
+                                                                                '직원의 권한이 수정되었습니다.\n' +
+                                                                                    '갱신하려면 "직원 관리" 버튼을 다시 누르세요.'
+                                                                            );
+                                                                        }
+                                                                    )
+                                                                    .catch(
+                                                                        () => {
+                                                                            alert(
+                                                                                '오류입니다.'
+                                                                            );
+                                                                        }
+                                                                    );
+                                                            }}>
                                                             권한 없음
                                                         </Dropdown.Item>
                                                         <Dropdown.Item
-                                                            onClick={
-                                                                onPermissionHandler
-                                                            }>
+                                                            onClick={(
+                                                                event
+                                                            ) => {
+                                                                event.preventDefault();
+                                                                axios
+                                                                    .post(
+                                                                        '/api/member',
+                                                                        {
+                                                                            name: a.name,
+                                                                            id: a.id,
+                                                                            permission:
+                                                                                (a.permission =
+                                                                                    'WORKER'),
+                                                                        }
+                                                                    )
+                                                                    .then(
+                                                                        () => {
+                                                                            alert(
+                                                                                '직원의 권한이 수정되었습니다.\n' +
+                                                                                    '갱신하려면 "직원 관리" 버튼을 다시 누르세요.'
+                                                                            );
+                                                                        }
+                                                                    )
+                                                                    .catch(
+                                                                        () => {
+                                                                            alert(
+                                                                                '오류입니다.'
+                                                                            );
+                                                                        }
+                                                                    );
+                                                            }}>
                                                             직원
                                                         </Dropdown.Item>
                                                         <Dropdown.Item
-                                                            onClick={
-                                                                onPermissionHandler
-                                                            }>
+                                                            onClick={(
+                                                                event
+                                                            ) => {
+                                                                event.preventDefault();
+                                                                axios
+                                                                    .post(
+                                                                        '/api/member',
+                                                                        {
+                                                                            name: a.name,
+                                                                            id: a.id,
+                                                                            permission:
+                                                                                (a.permission =
+                                                                                    'MASTER'),
+                                                                        }
+                                                                    )
+                                                                    .then(
+                                                                        () => {
+                                                                            alert(
+                                                                                '직원의 권한이 수정되었습니다.\n' +
+                                                                                    '갱신하려면 "직원 관리" 버튼을 다시 누르세요.'
+                                                                            );
+                                                                        }
+                                                                    )
+                                                                    .catch(
+                                                                        () => {
+                                                                            alert(
+                                                                                '오류입니다.'
+                                                                            );
+                                                                        }
+                                                                    );
+                                                            }}>
                                                             관리자
                                                         </Dropdown.Item>
                                                     </DropdownButton>
