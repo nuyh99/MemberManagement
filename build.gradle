@@ -20,6 +20,8 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.4' //마리아DB
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
 
 tasks.named('test') {

@@ -31,7 +31,7 @@ public class IntegratedController {
     }
 
     @RequestMapping("/error")
-    public String error(){return "index.html";}
+    public String errorHandler(){return "index";}
 
     @PostMapping("/")
     @ResponseBody
