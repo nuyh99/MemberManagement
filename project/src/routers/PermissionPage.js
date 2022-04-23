@@ -196,7 +196,7 @@ function WorkerState(props) {
                                                                 event.preventDefault();
                                                                 axios
                                                                     .post(
-                                                                        '/api/member',
+                                                                        '/api/permission',
                                                                         {
                                                                             name: a.name,
                                                                             id: a.id,
@@ -230,7 +230,7 @@ function WorkerState(props) {
                                                                 event.preventDefault();
                                                                 axios
                                                                     .post(
-                                                                        '/api/member',
+                                                                        '/api/permission',
                                                                         {
                                                                             name: a.name,
                                                                             id: a.id,
@@ -264,7 +264,7 @@ function WorkerState(props) {
                                                                 event.preventDefault();
                                                                 axios
                                                                     .post(
-                                                                        '/api/member',
+                                                                        '/api/permission',
                                                                         {
                                                                             name: a.name,
                                                                             id: a.id,
