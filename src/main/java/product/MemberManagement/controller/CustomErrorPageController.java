@@ -7,8 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CustomErrorPageController implements ErrorController {
 
-    @RequestMapping("/error")
-    public String goHome() {
+    private static final String PATH = "/error";
+
+    @RequestMapping(value = PATH)
+    public String error() {
         return "index";
+    }
+
+    public String getErrorPath() {
+        return PATH;
     }
 }
