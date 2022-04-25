@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Controller
 @RequestMapping("/api")
 public class IntegratedController {
@@ -29,9 +28,6 @@ public class IntegratedController {
         this.workerService = workerService;
         this.memberService = memberService;
     }
-
-    @RequestMapping("/error")
-    public String errorHandler(){return "forward:/";}
 
     @PostMapping("/")
     @ResponseBody
