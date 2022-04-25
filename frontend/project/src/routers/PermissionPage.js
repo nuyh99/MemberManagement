@@ -321,7 +321,7 @@ function UserState(props) {
     const onAddmemberHandler = (event) => {
         event.preventDefault();
         axios
-            .post('/api/member', {
+            .post('/api/members', {
                 name: name,
                 phone: phone,
             })
