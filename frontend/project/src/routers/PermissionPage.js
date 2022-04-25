@@ -152,10 +152,6 @@ function PermissionPage(props) {
 }
 
 function WorkerState(props) {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [permission, setPermission] = useState('');
-
     return (
         <div className="subcontent">
             <div className="container white-box add">

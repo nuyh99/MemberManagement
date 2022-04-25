@@ -55,7 +55,11 @@ function SearchPage(props) {
 
     const onPermissionHandler = (event) => {
         event.preventDefault();
+<<<<<<< HEAD
         axios.get('/api/workers').then((res) => {
+=======
+        axios.get('/api/permission').then((res) => {
+>>>>>>> 87ffd228019af42a966cf2f4368ce594dc2916fa
             if (res.data === '') {
                 alert('접근할 수 없습니다. 관리자가 아닙니다.');
             } else {
