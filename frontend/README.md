@@ -2,8 +2,6 @@
 
 <br>
 
-
-
 ## 휴대폰 대리점 고객 전화번호 목록 조회
 
 <hr>
@@ -22,17 +20,34 @@ Project creator : Frontend - 신재윤 / Backend - 황재현
 
 Use skills
 
-- Frontend : HTML, SCSS, Javascript, React, react-router-dom
-- Backend : Java, SpringBoot, MySQL, AWS
-(단, 호스팅 환경은 AWS에서 Vultur로 변경 예정)
+-   Frontend : HTML, SCSS, Javascript, React, react-router-dom
+-   Backend : Java, SpringBoot, MySQL, Vultr
 
 <br>
 
 API
-- axios 통신
-- Session 쿠키 인증 방식 (미해결)
-- 현재, 쿠키가 Response Cookie 단에서는 보이지만, 크롬 개발자 도구 Application Cookie에서 보이지 않는 문제가 발생. HttpOnly 옵션을 해제해도 지속적
-- React 포트번호 3000, Spring Boot 포트번호 8080에서 오는 오류로 파악중. CORS오류를 해결했다고 생각했으나, 완전히 해결되지 않은 것으로 추정
+
+-   axios 통신
+
+<br>
+
+Security
+
+-   Session 쿠키 인증 방식 (해결, 로컬 환경에서는 withCredentials:true를 프론트단 백단 모두 적용, 배포 후는 다시 제거)
+-   현재, 쿠키가 Response Cookie 단에서는 보이지만, 크롬 개발자 도구 Application Cookie에서 보이지 않는 문제가 발생. HttpOnly 옵션을 해제해도 지속적
+-   React 포트번호 3000, Spring Boot 포트번호 8080에서 오는 오류로 파악중. CORS오류를 해결했다고 생각했으나, 완전히 해결되지 않은 것으로 추정
+-   위의 오류들 모두 해결, 이는 프론트는 로컬 환경에서, 백은 aws에 배포 후 환경에서 서로 통신을 시도 했기 때문에 어떤 옵션을 줘도 되지 않았음.
+-   그래서, 백단을 배포 환경이 아닌 로컬 환경으로 옮기고 cors와 withCredentials 옵션을 주니 해결되었음.
+-   서버 배포 시 api 주소도 로컬환경에서 api로 바꿨음
+
+<br>
+
+해결하고 싶은 과제
+
+-   nginx를 통한 서버 배포
+-   리액트 라우팅 이후 새로고침 혹은 뒤로 가기 시에 404 에러 발생
+-   이는 SPA의 특징적인 것으로 해결 방법 3가지가 있어서 우선에는 그 중 하나인 HashRouter 방식 채택
+-   남은 두 가지 방식이 nginx 방식과 스프링부트에서 에러 컨트롤러를 작성하는 방식임.
 
 <hr>
 
