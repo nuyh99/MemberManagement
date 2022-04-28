@@ -88,9 +88,9 @@ function PermissionPage(props) {
                                     <h3>관리자 페이지입니다.</h3>
                                     <br></br>
                                     <p>
-                                        직원 관리와 고객 관리가 가능합니다.
+                                        체인점 관리와 고객 관리가 가능합니다.
                                         <br></br>
-                                        직원 권한 변경, 고객 번호 추가, 삭제
+                                        체인점 권한 변경, 고객 번호 추가, 삭제
                                         <br></br>
                                         작업 이후{' '}
                                         <strong style={{color: 'blue'}}>
@@ -118,7 +118,7 @@ function PermissionPage(props) {
                                                 paddingRight: '40px',
                                             }}
                                             onClick={onWorkerHandler}>
-                                            직원 관리
+                                            체인점 관리
                                         </Button>
                                     </div>
 
@@ -156,15 +156,15 @@ function WorkerState(props) {
         <div className="subcontent">
             <div className="container white-box add">
                 <div className="worker">
-                    <h2>직원 관리</h2>
+                    <h2>체인점 관리</h2>
                     <div className="workerInfo" style={{overflow: 'auto'}}>
                         <div>
                             <Table responsive="lg">
                                 <thead style={{textAlign: 'center'}}>
                                     <tr>
                                         <th></th>
-                                        <th>직원 이름</th>
-                                        <th>직원 아이디</th>
+                                        <th>체인점 이름</th>
+                                        <th>체인점 아이디</th>
                                         <th>현재 권한</th>
                                         <th>등급 변경</th>
                                     </tr>
@@ -204,8 +204,8 @@ function WorkerState(props) {
                                                                     .then(
                                                                         () => {
                                                                             alert(
-                                                                                '직원의 권한이 수정되었습니다.\n' +
-                                                                                    '갱신하려면 "직원 관리" 버튼을 다시 누르세요.'
+                                                                                '체인점의 권한이 수정되었습니다.\n' +
+                                                                                    '갱신하려면 "체인점 관리" 버튼을 다시 누르세요.'
                                                                             );
                                                                         }
                                                                     )
@@ -238,8 +238,8 @@ function WorkerState(props) {
                                                                     .then(
                                                                         () => {
                                                                             alert(
-                                                                                '직원의 권한이 수정되었습니다.\n' +
-                                                                                    '갱신하려면 "직원 관리" 버튼을 다시 누르세요.'
+                                                                                '체인점의 권한이 수정되었습니다.\n' +
+                                                                                    '갱신하려면 "체인점 관리" 버튼을 다시 누르세요.'
                                                                             );
                                                                         }
                                                                     )
@@ -251,7 +251,7 @@ function WorkerState(props) {
                                                                         }
                                                                     );
                                                             }}>
-                                                            직원
+                                                            체인점
                                                         </Dropdown.Item>
                                                         <Dropdown.Item
                                                             onClick={(
@@ -272,8 +272,8 @@ function WorkerState(props) {
                                                                     .then(
                                                                         () => {
                                                                             alert(
-                                                                                '직원의 권한이 수정되었습니다.\n' +
-                                                                                    '갱신하려면 "직원 관리" 버튼을 다시 누르세요.'
+                                                                                '체인점의 권한이 수정되었습니다.\n' +
+                                                                                    '갱신하려면 "체인점 관리" 버튼을 다시 누르세요.'
                                                                             );
                                                                         }
                                                                     )
